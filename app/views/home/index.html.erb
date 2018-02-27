@@ -1,0 +1,85 @@
+<div class="main-container">
+  <h1>Resto trop bien !</h1>
+  <h2>Miam ici on mange pas bien</h2>
+  <div class="center-tab">
+    <ul class="side bar tabs">
+      <li id="tabs1" onclick="showStuff(this)">Présentation</li>
+      <li id="tabs2" onclick="showStuff(this)">Menu</li>
+      <li id="tabs3" onclick="showStuff(this)">Lorem</li>  
+    </ul>
+    <div id="tabs-1" class="tabContent">
+      <h3>Bienvenue dans mon restaurant</h3>
+      <p>Heureusement qu'il n'existe pas en réalité</p>
+      <p>La cuisine c'est vraiment pas mon truc</p>
+    </div>
+    <div id="tabs-2" class="tabContent">
+      <h3>Voici le menu du jour</h3>
+      <p>Poulpe assaisoné</p>
+      <p>Cazu marzu affiné à point</p>
+      <p>Plateau de tarantule et sa sauce piquante</p>
+    </div>
+    <div id="tabs-3" class="tabContent">
+      <p>Un bon vieux Lorem Ipsum que j'ai la flemme de copier coller</p>
+    </div>
+  </div>
+</div>
+<div class="slideshow-container">
+  <div class="carouselito fade">
+    <%= image_tag("poulpe.jpg", width: '100%') %>
+    <div class="text">Le bon poulpe vivant qui gesticule dans tout les sens</div>
+  </div>
+  <div class="carouselito fade">
+    <%= image_tag("cazu.jpg", width: '100%') %>
+    <div class="text">Mmmmh le cazu marzu, ce fromage qui remu en bouche</div>
+  </div>
+  <div class="carouselito fade">
+    <%= image_tag("tarantule.jpg", width: '100%') %>
+    <div class="text">Les tarantules, Plus croustillantes que des chips !</div>
+  </div>
+  <a class="prev" onclick="changeslide(-1)">&#x292A;</a>
+  <a class="next" onclick="changeslide(1)">&#x292D;</a>
+</div>
+<br>
+<div style="text-align:center">
+  <span class="dot" onclick="dotslide(1)"></span> 
+  <span class="dot" onclick="dotslide(2)"></span> 
+  <span class="dot" onclick="dotslide(3)"></span> 
+</div>
+
+<script type="text/javascript">
+// fonctions pour animer le carousel
+var slideIndex = 1;
+var timer = null;
+showSlides(slideIndex);
+
+// changement de l'index grace aux flèches et remise à zéro du timer
+function changeslide(n) {
+  clearTimeout(timer);
+  showSlides(slideIndex += n);
+}
+
+// naviguation avec les dots
+function dotslide(n) {
+  clearTimeout(timer);
+  showSlides(slideIndex = n);
+}
+
+// fonction principale pour naviguer dans le carousel 
+function showSlides(n) {
+  var i;
+  var slides = document.getElementsByClassName("carouselito");
+  var dots = document.getElementsByClassName("dot");
+  if (n==undefined){n = ++slideIndex}
+  if (n > slides.length) {slideIndex = 1}
+  if (n < 1) {slideIndex = slides.length}
+  for (i = 0; i < slides.length; i++) {
+      slides[i].style.display = "none";
+  }
+  for (i = 0; i < dots.length; i++) {
+      dots[i].className = dots[i].className.replace(" active", "");
+  }
+  slides[slideIndex-1].style.display = "block";
+  dots[slideIndex-1].className += " active";
+  timer = setTimeout(showSlides, 5000);
+} 
+</script>
